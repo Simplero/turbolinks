@@ -115,6 +115,9 @@ fetchHistory = (cachedPage, options = {}) ->
   triggerEvent EVENTS.RESTORE
 
 cacheCurrentPage = ->
+  # Calvin: Added this to prevent caching of pages with videojs on them
+  return if document.querySelector('[data-no-turbolinks-cache]')?
+  
   currentStateUrl = new ComponentUrl currentState.url
 
   pageCache[currentStateUrl.absolute] =
